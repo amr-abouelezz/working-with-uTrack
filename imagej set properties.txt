@@ -1,0 +1,16 @@
+setBatchMode(true);
+input = "C:/Input Folder Path/";
+output = "C:/Output Folder Path/";
+list = getFileList(input);
+
+function action(input, output, filename) {
+        run("Bio-Formats Macro Extensions");
+		Ext.openImagePlus(input + filename);
+        //open(input + filename);
+Stack.setXUnit("micron");
+run("Properties...", "channels=1 slices=1 frames=300 pixel_width=0.117 pixel_height=0.117 voxel_depth=0.117 frame=1");
+        saveAs("Tiff", output + filename);
+        close();
+}
+for (i = 0; i < list.length; i++)
+        action(input, output, list[i]);
