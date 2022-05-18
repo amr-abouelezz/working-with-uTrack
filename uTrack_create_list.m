@@ -32,15 +32,12 @@ for i=1:length(fNames)
     matFilename=char(matFilename);
     movie.movieDataFileName_=matFilename;
     %change output directory
-    %matOutput=movie.outputDirectory_ + "\" + i;
     matOutput=output + "\" + i;
     matOutput=char(matOutput);
     movie.outputDirectory_=matOutput;
     %change channel path and name
-    movie.channels_.channelPath_=fNames{1,i};
-    %save
+    movie.channels_.channelPath_=fNames{1,i}; %save
     matToSave=videosMat + "\" + matFilename;
-    %mkdir(matOutput);
     save(matToSave, 'movie');
 end
 %% build list
@@ -52,6 +49,5 @@ matNames = dir( fullfile(videosMat,'*.mat') ); %get names of .mat files
 matNames = strcat(videosMat, filesep, {matNames.name});
 refList.movieDataFile_=matNames; %list .mat files
 refList.outputDirectory_=(char(videosList)); %specify list output path, largely useless but necessary
-videosList=refList.movieListPath_ + "\" + "videosList.mat"; %create path and filename for movie list
-%ML=refList;
+videosList=refList.movieListPath_ + "\" + "videosList.mat"; %create path and filename for movie list %ML=refList;
 save(videosList, 'refList');
